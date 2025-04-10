@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Empleados</title>
+</head>
+<body>
+<h1>Empleados</h1>
+
+<form th:action="@{/employees}" method="get">
+    <input type="text" name="search" placeholder="Buscar..." />
+    <button type="submit">Buscar</button>
+    <a th:href="@{/employees/new}">Nuevo Empleado</a>
+</form>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Email</th>
+        <th>Salario</th>
+        <th>Departamento</th>
+        <th>Puesto</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="emp : ${employees}">
+        <td th:text="${emp.firstName}">Nombre</td>
+        <td th:text="${emp.lastName}">Apellido</td>
+        <td th:text="${emp.email}">Email</td>
+        <td th:text="${emp.salary}">Salario</td>
+        <td th:text="${emp.department?.departmentName}">Departamento</td>
+        <td th:text="${emp.job?.jobTitle}">Puesto</td>
+        <td>
+            <a th:href="@{/employees/edit/{id}(id=${emp.employeeId})}">Editar</a>
+            <a th:href="@{/employees/delete/{id}(id=${emp.employeeId})}"
+               onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

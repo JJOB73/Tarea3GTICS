@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Historial de Empleados</title>
+</head>
+<body>
+<h1>Historial de Empleados</h1>
+
+<form th:action="@{/history}" method="get">
+    <input type="text" name="search" placeholder="Buscar historial..." />
+    <button type="submit">Buscar</button>
+</form>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Fecha Inicio</th>
+        <th>Fecha Fin</th>
+        <th>Puesto</th>
+        <th>Departamento</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="h : ${history}">
+        <td th:text="${h.employee.firstName}">Nombre</td>
+        <td th:text="${h.employee.lastName}">Apellido</td>
+        <td th:text="${h.startDate}">Inicio</td>
+        <td th:text="${h.endDate}">Fin</td>
+        <td th:text="${h.job.jobTitle}">Puesto</td>
+        <td th:text="${h.department.departmentName}">Departamento</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

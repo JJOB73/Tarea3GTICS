@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Salarios Altos</title>
+</head>
+<body>
+<h1>Empleados con Salario Mayor a 15000</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Salario</th>
+        <th>Puesto</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="e : ${list}">
+        <td th:text="${e.firstName}">Nombre</td>
+        <td th:text="${e.lastName}">Apellido</td>
+        <td th:text="${e.salary}">Salario</td>
+        <td th:text="${e.job?.jobTitle}">Puesto</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

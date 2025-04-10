@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reportes</title>
+</head>
+<body>
+<h1>Reportes de Empleados</h1>
+
+<ul>
+    <li><a th:href="@{/search/highsalary}">Empleados con salario mayor a 15000</a></li>
+    <li><a th:href="@{/search/departments}">Ciudades con departamentos con más de 3 empleados</a></li>
+    <li><a th:href="@{/search/experienced-managers}">Gerentes con más de 5 años de experiencia</a></li>
+</ul>
+</body>
+</html>

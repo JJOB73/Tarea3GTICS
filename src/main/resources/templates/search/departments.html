@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Departamentos con más de 3 empleados</title>
+</head>
+<body>
+<h1>Departamentos con Más de 3 Empleados</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Departamento</th>
+        <th>Ciudad</th>
+        <th>País</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="d : ${list}">
+        <td th:text="${d.departmentName}">Departamento</td>
+        <td th:text="${d.location.city}">Ciudad</td>
+        <td th:text="${d.location.country?.countryName}">País</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario de Empleado</title>
+</head>
+<body>
+<h1 th:text="${employee.employeeId != null ? 'Editar Empleado' : 'Nuevo Empleado'}"></h1>
+
+<form th:action="@{/employees/save}" th:object="${employee}" method="post">
+    <input type="hidden" th:field="*{employeeId}" />
+
+    <label>Nombre:</label>
+    <input type="text" th:field="*{firstName}" required/><br/>
+
+    <label>Apellido:</label>
+    <input type="text" th:field="*{lastName}" required/><br/>
+
+    <label>Email:</label>
+    <input type="email" th:field="*{email}" required/><br/>
+
+    <label>Salario:</label>
+    <input type="number" th:field="*{salary}" required/><br/>
+
+    <label>Jefe:</label>
+    <select th:field="*{manager}">
+        <option th:each="m : ${managers}" th:value="${m}" th:text="${m.firstName + ' ' + m.lastName}"></option>
+    </select><br/>
+
+    <label>Puesto:</label>
+    <select th:field="*{job}">
+        <option th:each="j : ${jobs}" th:value="${j}" th:text="${j.jobTitle}"></option>
+    </select><br/>
+
+    <label>Departamento:</label>
+    <select th:field="*{department}">
+        <option th:each="d : ${departments}" th:value="${d}" th:text="${d.departmentName}"></option>
+    </select><br/>
+
+    <button type="submit">Guardar</button>
+    <a th:href="@{/employees}">Cancelar</a>
+</form>
+</body>
+</html>
