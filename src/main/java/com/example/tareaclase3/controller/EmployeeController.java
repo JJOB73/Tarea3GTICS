@@ -46,11 +46,7 @@ public class EmployeeController {
         return "employee/form";
     }
 
-    @PostMapping("/save")
-    public String saveEmployee(@ModelAttribute Employee employee) {
-        employeeRepo.save(employee);
-        return "employee/list";
-    }
+
 
     @GetMapping("/edit/{id}")
     public String editEmployee(@PathVariable("id") int id, Model model) {
@@ -67,6 +63,29 @@ public class EmployeeController {
         employeeRepo.deleteById(id);
         return "redirect:/employees";
     }
+    @PostMapping("/save")
+    public String saveEmployee(@ModelAttribute Employee employee,
+                               @RequestParam("job.jobId") String jobId,
+                               @RequestParam("department.departmentId") Integer departmentId,
+                               @RequestParam("manager.employeeId") Integer managerId) {
+
+        // Buscar las entidades en la base de datos
+        if (jobId != null && !jobId.isEmpty()) {
+            employee.setJob(jobRepo.findById(jobId).orElse(null));
+        }
+
+        if (departmentId != null) {
+            employee.setDepartment(departmentRepo.findById(departmentId).orElse(null));
+        }
+
+        if (managerId != null) {
+            employee.setManager(employeeRepo.findById(managerId).orElse(null));
+        }
+
+        employeeRepo.save(employee);
+        return "redirect:/employees";
+    }
+
 
 
 }
